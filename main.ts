@@ -4,38 +4,28 @@
  */
 
 //% color="#AA278D" 
-namespace zoo {
-    //% block="build aquarium of size $size"
-    //% size.defl=6
-    //% size.min=6 size.max=100
-    export function aquarium(size: number) {
+namespace fountains {
+    //% block="build lava fountain of size $size"
+    //% size.defl=8
+    //% size.min=3 size.max=50
+    export function lavaFountain (size: number) {
         blocks.fill(
-            GLASS,
-            posCamera(-size / 2, 0, 5),
-            posCamera(size / 2, size, 5 + size),
-            FillOperation.Replace
+        NETHERRACK,
+        posCamera(-size / 2, 0, 5),
+        posCamera(size / 2, 1, 5 + size),
+        FillOperation.Replace
         )
         blocks.fill(
-            WATER,
-            posCamera(-size / 2 + 1, 1, 6),
-            posCamera(size / 2 - 1, size - 1, 4 + size),
-            FillOperation.Replace
+        LAVA,
+        posCamera(-size / 2 + 1, 1, 6),
+        posCamera(size / 2 - 1, 1, 4 + size),
+        FillOperation.Replace
         )
-    }
-    //% block="build fence of width $width and height $height"
-    //% width.defl=6
-    //% width.min=6 width.max=100
-    //% height.defl=2
-    //% height.min=2 height.max=20
-    export function fence(width: number, height: number) {
-        builder.teleportTo(player.position())
-        builder.move(BACK, width / 2)
-        builder.move(RIGHT, width / 2)
-        builder.mark()
-        for (let index = 0; index < 4; index++) {
-            builder.move(FORWARD, width)
-            builder.turn(LEFT_TURN)
-        }
-        builder.raiseWall(OAK_FENCE, height)
+        blocks.fill(
+        LAVA,
+        posCamera(0, 4, 5 + size/2),
+        posCamera(0, 4, 5 + size/2),
+        FillOperation.Replace
+        )
     }
 }
